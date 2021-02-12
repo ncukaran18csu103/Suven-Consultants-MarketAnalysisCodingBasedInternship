@@ -1,0 +1,100 @@
+Market Basket Analysis Using Association Rule Mining With Apriori ECLAT and FPGROWTH Algorithm
+ABOUT DATASET
+The dataset consists of various item which are brought by user in various transactions . The goal of the competition is to predict which products will be in a user's next order. The dataset is anonymized and contains a sample of over7501 rows with 20 plus unique item in the dataset transcations . For each transactions we have, with the sequence of products purchased in each order. All other information we want to conclude for better selling of products with another products.
+Library
+The libraries used here are:-
+1)NumPy
+2)Pandas
+3)Matplotlib
+4)Apyori
+5) Mlextend
+6) pyfpgrowth
+Association rule mining
+Association rule mining finds interesting associations and relationships among large sets of data items. This rule shows how frequently a itemset occurs in a transaction. A typical example is Market Based Analysis.
+Market Based Analysis is one of the key techniques used by large relations to show associations between items.It allows retailers to identify relationships between the items that people buy together frequently.
+Given a set of transactions, we can find rules that will predict the occurrence of an item based on the occurrences of other items in the transaction.
+In this dataset we will be using various algorithm to predict the relation between the item sets and Make a strong confidence so we will put these items along them to have better sell of products in the market for better profit.
+ALORITHM FOR ASSOCIATION RULE MINING
+We will be implementing 3 algorithm for prediction
+1. Apriori
+2. ECLAT
+3. FP-growth
+For each algorithm we will using our data with different approach according to the algorithm need and analysis result according to the lift score and various value for better reach of market basket analysis to achieve profit.
+Data Pre-processing
+We will be importing libraries and then through pandas importing the dataset for using and finding relation between them.
+Then we will be doing the analysis of the dataset through pandas and numpy for making the fruitfull information from the dataset
+which consists of info , describe and null functions for better reach
+of data.
+Apriori
+Apriori is an algorithm used for Association Rule Mining. It searches for a series of frequent sets of items in the datasets. It builds on associations and correlations between the itemsets. It is the algorithm behind "You may also like" where you commonly saw in recommendation platforms.
+General Process of the Apriori algorithm
+ The entire algorithm can be divided into two steps:
+Step 1: Apply minimum support to find all the frequent sets with k items in a database.
+Step 2: Use the self-join rule to find the frequent sets with k+1 items with the help of frequent k-itemsets.
+We have different hyperparameters for the association rule mining
+The hyperparameters choosen on this training are:
+min_support = items bought in rows to the total number of transcations.
+min_confidence: at least 20%, min_lift = minimum of 2 (less than that is too low) and max= 5 depends on the need rather.
+min_length: we want at least 2 items or according to needs to be associated. No point in having a single item in the result
+lift : confidence/support
+conviction : tell s about the how the dataset is wrongly assigned to
+Hyperparameters
+We have taken minimum support = 3 , minimum confidence=70%
+and minimum length = 3 to have better output and we found the results satisfactory.
+Then we have result generated for the hyperparameters according to them .
+Then we come up with the result of hyper parameters in the dataset with the confidence in it.
+Now we will go for the lift and association rules among the itemsets and then print lift and association rues and then get result which has the highest we give as optimal item set for market basket analysis.
+Artificial Intelligence, Deep Learning, and Medical Practice | Data Driven Investor
+The utility of artificial intelligence and Deep Neural Learning may seem potentially legit and promising, particularly…www.datadriveninvestor.com
+Then we will make the data frame for the lift and association rule mining and ascending the value of it for having batter understanding of the lift with X -> Y.
+The association rule generated are as follows according the hyperparamters.
+RESULTS for better understanding
+ECLAT ALORITHM
+The ECLAT algorithm stands for Equivalence Class Clustering and bottom-up Lattice Traversal. It is one of the popular methods of Association Rule mining. It is a more efficient and scalable version of the Apriori algorith
+While the Apriori algorithm works in a horizontal sense imitating the Breadth-First Search of a graph,
+the ECLAT algorithm works in a vertical manner just like the Depth-First Search of a graph.
+This vertical approach of the ECLAT algorithm makes it a faster algorithm than the Apriori algorithm.
+How the algorithm work? :
+The basic idea is to use Transaction Id Sets(tidsets) intersections to compute the support value of a candidate and avoiding the generation of subsets which do not exist in the prefix tree.
+In the first call of the function, all single items are used along with their tidsets.
+Then the function is called recursively and in each recursive call, each item-tidset pair is verified
+and combined with other item-tidset pairs. This process is continued until no candidate item-tidset pairs can be combined.
+Steps to perform eclat algorithm-
+1.Get transcition ID of each dataset and scan it.
+2.TID of {a} has only transcation of a in its coloumns or containg {a} only.
+3.Intersect TID list of with other TIDS of other items other than {a} and make result with combination o with each item {a,b},{a,c},{a,d},… upto nth item in dataset and similary for each itemthen we have
+={a}-condition of data(if {a} is removed)
+4.repeat for n th rows with the same condition {a}-conditional data(item removed)
+5.reapeat all the other item set for the same.
+IMPLEMENTATION WITH CODE
+Converting the dataset a particluar row into a single transcation of a user in the form of transcations.
+IMPORTANT LIBRARY
+pip install mlxtend
+pip install - no-binary :all: mlxtend
+Mlxtend (machine learning extensions) is a Python library of useful tools for the day-to-day data science tasks.
+this basically hepls to genearte frequent pattern in data and then find the association rule mining between
+them.this helps us in plottig the dataset and helps data with certian tools.
+We come up with the main result that have quick action by generating rules.
+df_rules.sort_values('lift',ascending=False).head(50)
+#top 5 result
+Drawbacks of the Apriori Algorithm also has are:-
+1. At each step, candidate sets have to be built.
+2. To build the candidate sets, the algorithm has to repeatedly scan the database.
+To overcome this we have use algorithm éclat for avoid repeation and have a faster in terms of searching method for relation.
+FP GROWTH ALGORITHM
+The FP-Growth Algorithm, proposed by Han in, is an efficient and scalable method for mining the complete set of frequent patterns by pattern fragment growth, using an extended prefix-tree structure for storing compressed and crucial information about frequent patterns named frequent-pattern tree (FP-tree).
+steps
+1.Following are the steps for FP Growth Algorithm
+2.Scan DB once, find frequent 1-itemset (single item pattern)
+3.Sort frequent items in frequency descending order, f-list.
+4.Scan DB again, construct FP-tree.
+5.Construct the conditional FP tree in the sequence of reverse order of F - List - generate frequent item set.
+6.Reapeat and then Finish until we come up with strong association mining rule.
+In this we are adding the transcations into the find_frequent_patterns of pyfpgrowth .
+Assingning value of support_threshold 2 is min and we can go according to requirements
+It will help us generating confidence among the items to the other item with its score value through.
+generate_association_rules and confidence value is assign for ptimal sell of the products.
+{(left): ((right), confidence)}
+As we can't find lift and conviction directly on the rules generated we have to make a function for this.
+As, it is not predifed in pyfpgrowth library.
+I am thankful to mentors at https://internship.suvenconsultants.com for providing awesome problem statements and giving many of us a Coding Internship Exprience. Thank you www.suvenconsultants.com"
